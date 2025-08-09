@@ -33,7 +33,7 @@ const getDBProperties = async (ID) => {
     }
 };
 
-export const getPage = async (pageID) => {
+const getPage = async (pageID) => {
     try {
         const response = await api.get(`/pages/${pageID}`);
         return response.data
@@ -43,10 +43,41 @@ export const getPage = async (pageID) => {
     }
 }
 
+const updateWeight = async (pageID, weight) => {
+    try {
+        const response = await api.patch(`/pages/${pageID}`, {
+            properties : {
+                "Current Weight" : { number : weight  }
+            }
+        });  
+        return response.data      
+    } catch (error) {
+        console.error('Error updating weight')
+        throw error
+    }
+}
+
+app.get(`/api/config`, (req, res) => {
+    res.json({
+        prefix: process.env.PREFIX || "^",
+        suffix: process.env.SUFFIX || "Enter"
+    })
+})
+
 app.get(`/:pageId`, async (req, res) => {
     try {
         const page = await getPage(req.params.pageId);
         res.json(page);
+    } catch (error) {
+        res.status(500).json({ error: error.message})
+    }
+})
+
+app.get(`/:pageId/:weight`, async (req, res) => {
+    try {
+        const { pageId, weight} = req.params;
+        const update = await updateWeight(pageId, weight)
+        res.json(update)
     } catch (error) {
         res.status(500).json({ error: error.message})
     }

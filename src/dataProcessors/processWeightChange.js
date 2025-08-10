@@ -9,7 +9,12 @@ export const processWeightChange = async (params) => {
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
     }
-    const data = await response.json();
+    const pageData = await response.json();
+    const name = pageData.properties["Name"].title[0].plain_text;
+    const id = `${pageData.properties["ID"].unique_id.prefix}-${pageData.properties["ID"].unique_id.number}`;
+
+    alert(`Weight was successfully updated to ${weight} for ${name} (${id}).`);                                        
+
     return data
 
 }

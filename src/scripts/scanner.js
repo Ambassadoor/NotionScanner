@@ -79,14 +79,7 @@ const onScanButtonClick = (callback) => {
             if (response?.done) {
                 cleanup(intervalId, abortController);
                 if (typeof response.callback === "function") {
-                    const pageData = await response.callback(response.params);
-
-                    const weight = pageData.properties["Current Weight"].number;
-                    const name = pageData.properties["Name"].title[0].plain_text;
-                    const id = `${pageData.properties["ID"].unique_id.prefix}-${pageData.properties["ID"].unique_id.number}`;
-
-                    alert(`Weight was successfully updated to ${weight} for ${name} (${id}).`);                                        
-
+                    await response.callback(response.params);
                 }
             }
         }

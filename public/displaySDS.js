@@ -12,7 +12,7 @@ const getPage = async (pageId) => {
 }
 
 // Sets src of iFrame to url to display sds
-export const getSDS = async ({codes}) => {
+export const displaySDS = async ({codes}) => {
     const code = codes[0];
     const pageId = getPageID(JSON.parse(code));
     const page = await getPage(pageId);

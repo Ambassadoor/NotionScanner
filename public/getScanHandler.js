@@ -1,9 +1,9 @@
-import { sdsScanValidator } from "./sdsScanValidator.js"
+import { sdsScanHandler } from "./sdsScanHandler.js"
 
 // Maps validator functions to button data-func values
-export const scanButtonMap = (func) => {
-    const funcMap = {
-        sds: sdsScanValidator,
+export const getScanHandler = (func) => {
+    const dispatcher = {
+        sds: sdsScanHandler,
         checkIn: "",
         checkOut: "",
         weigh: "",
@@ -15,5 +15,5 @@ export const scanButtonMap = (func) => {
         getInfo: ""
     }
 
-    return funcMap[func]
+    return dispatcher[func]
 }

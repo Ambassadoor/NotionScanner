@@ -1,4 +1,4 @@
-import { scanButtonMap } from "./scanButtonMap.js";
+import { getScanHandler } from "./getScanHandler.js";
 
 let prefix = "^";  // default fallback
 let suffix = "Enter";  // default fallback
@@ -30,7 +30,7 @@ document.querySelector(".scan_buttons_container").addEventListener("click", (e) 
     if (!button) return;
 
     // Grabs the appropriate handler function based on button data-func
-    const buttonFunc = scanButtonMap(button.dataset.func);
+    const buttonFunc = getScanHandler(button.dataset.func);
     
     // Calls click handler
     onScanButtonClick(buttonFunc);

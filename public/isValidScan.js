@@ -1,7 +1,7 @@
 // Reusable code checkers for common code types
 
 // Checks if passed in code is a valid Chem code
-const isValidChemCode = (code) => {
+const isValidChemScan = (code) => {
     // Chem code keys
     const chemKeys = ["id", "pageId"];
     let parsed
@@ -23,18 +23,18 @@ const isValidChemCode = (code) => {
 }
 
 // Will validate an ID scan
-const isValidIdCode = () => {
+const isValidIdScan = () => {
 
 }
 
 // Will validate a location code scan
-const isValidLocationCode = () => {
+const isValidLocationScan = () => {
 
 }
 
 // Validation type map
-export const scanValidatorTypes = {
-    chem: isValidChemCode,
-    id: isValidIdCode,
-    location: isValidLocationCode,
+export const isValidScan = {
+    chem: isValidChemScan,
+    id: isValidIdScan,
+    location: isValidLocationScan,
 }

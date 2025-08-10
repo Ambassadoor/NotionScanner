@@ -1,4 +1,4 @@
-import { getScanHandler } from "./getScanHandler.js";
+import { getScanHandler } from "../getScanHandler.js";
 
 let prefix = "^";  // default fallback
 let suffix = "Enter";  // default fallback

@@ -1,6 +1,6 @@
 // Import helper functions
-import { getPageID } from "./getPageID.js";
-import { getSDSUrl } from "./getSDSUrl.js";
+import { getPageID } from "../helpers/getPageID.js";
+import { getSDSUrl } from "../helpers/getSDSUrl.js";
 
 // Get iFrame element to display file
 const iFrame = document.querySelector("#SDS_viewer")

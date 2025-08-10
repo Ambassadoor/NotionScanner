@@ -1,5 +1,5 @@
-import { isValidScan } from "./isValidScan.js"
-import { displaySDS } from "./displaySDS.js"
+import { isValidScan } from "../helpers/isValidScan.js"
+import { displaySDS } from "../dataProcessors/displaySDS.js"
 
 // If code param is valid, add to codes array and returns data function with params
 export const sdsScanHandler = (code, codes) => {

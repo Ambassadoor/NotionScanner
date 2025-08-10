@@ -6,7 +6,7 @@ import express from "express";
 
 const app = express();
 
-app.use(express.static('public'))
+app.use(express.static('src'))
 
 
 const port = process.env.PORT;

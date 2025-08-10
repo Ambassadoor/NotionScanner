@@ -64,7 +64,7 @@ app.get(`/api/config`, (req, res) => {
     })
 })
 
-app.get(`/:pageId`, async (req, res) => {
+app.get(`/api/:pageId`, async (req, res) => {
     try {
         const page = await getPage(req.params.pageId);
         res.json(page);
@@ -73,7 +73,7 @@ app.get(`/:pageId`, async (req, res) => {
     }
 })
 
-app.get(`/:pageId/:weight`, async (req, res) => {
+app.get(`/api/:pageId/:weight`, async (req, res) => {
     try {
         const { pageId, weight} = req.params;
         const update = await updateWeight(pageId, weight)

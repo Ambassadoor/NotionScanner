@@ -1,4 +1,5 @@
-import { sdsScanHandler } from "../handlers/sdsScanHandler.js"
+import { sdsScanHandler } from "../handlers/sdsScanHandler.js";
+import { weighScanHandler } from "../handlers/weighScanHandler.js";
 
 // Maps validator functions to button data-func values
 export const getScanHandler = (func) => {
@@ -6,7 +7,7 @@ export const getScanHandler = (func) => {
         sds: sdsScanHandler,
         checkIn: "",
         checkOut: "",
-        weigh: "",
+        weigh: weighScanHandler,
         move: "",
         addWaste: "",
         combineWaste: "",

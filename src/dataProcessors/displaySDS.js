@@ -7,7 +7,7 @@ const iFrame = document.querySelector("#SDS_viewer")
 
 // Retrieve notion page data
 const getPage = async (pageId) => {
-    const response = await fetch(`/${pageId}`);
+    const response = await fetch(`/api/${pageId}`);
     return response.json();
 }
 

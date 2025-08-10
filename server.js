@@ -20,6 +20,7 @@ const api = axios.create({
     headers: {
         'Authorization': `Bearer ${apiKey}`,
         "Notion-Version": version,
+        "Content-Type": "application/json"
     }
 })
 
@@ -46,13 +47,18 @@ const getPage = async (pageID) => {
 const updateWeight = async (pageID, weight) => {
     try {
         const response = await api.patch(`/pages/${pageID}`, {
-            properties : {
-                "Current Weight" : { number : weight  }
+            "properties" : {
+                "Current Weight" : { "number" : Number(weight)  }
             }
         });  
         return response.data      
     } catch (error) {
-        console.error('Error updating weight')
+        if (error.response) {
+            console.error(`Error status:`, error.response.status)
+            console.error(`Error data:`, error.response.data)
+        } else {
+            console.error(`Error updating weight ${error.message}`)
+        }
         throw error
     }
 }
@@ -73,7 +79,7 @@ app.get(`/api/:pageId`, async (req, res) => {
     }
 })
 
-app.get(`/api/:pageId/:weight`, async (req, res) => {
+app.get(`/api/updateWeight/:pageId/:weight`, async (req, res) => {
     try {
         const { pageId, weight} = req.params;
         const update = await updateWeight(pageId, weight)

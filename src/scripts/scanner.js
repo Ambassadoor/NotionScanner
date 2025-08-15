@@ -96,11 +96,12 @@ const cleanup = (intervalId, abortController) => {
     abortController.abort();
 }
 
-const mLButton = document.querySelector("#mL")
+const radioButtons = document.querySelector("#unit_div")
 const densityInput = document.querySelector("#densityDiv")
 
-mLButton.addEventListener('change', () => {
-    if (mLButton.value === "mL" && mLButton.checked) {
+radioButtons.addEventListener('change', (e) => {
+    const button = e.target.closest(".radio")
+    if (button.value === "mL" && button.checked) {
         densityInput.hidden = false;
         densityInput.required = true;
     } else {

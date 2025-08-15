@@ -62,11 +62,12 @@
                 title="Numerical values only",
                 required/>
         </p>
-        <fieldset style="display: inline-block;">
+        <fieldset id="unit_div" style="display: inline-block;">
             <legend>Select the unit of measure:</legend>
             <input
                 type="radio",
                 id="g",
+                class="radio",
                 name="unit",
                 value="g",
                 required,
@@ -75,6 +76,7 @@
             <input
                 type="radio",
                 id="mL",
+                class="radio",
                 name="unit",
                 value="mL"/>
             <label for="mL">mL</label>

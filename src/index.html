@@ -25,6 +25,129 @@
         spellcheck="off"
         autocorrect="off"
         style="position: absolute; left: -9999px"/>
+    <form>
+        <p>
+            <label for="name" >Chemical Name:</label>
+            <input 
+                type="text", 
+                id="name", 
+                name="Chemical Name", 
+                placeholder="Sodium Hydroxide, etc..."
+                autofocus,
+                required/>
+        </p>
+        <p>
+            <label for="cas">CAS #:</label>
+            <input 
+                type="text", 
+                id="cas", 
+                name="CAS", 
+                inputmode="numeric"
+                pattern="\d{1,7}-\d{2}-\d",
+                placeholder="0000-00-0",
+                title="CAS numbers must be in the format [1-7 digits]-[2 digits]-[1 digit]",
+                required
+                />
+        </p>
+        <p>
+            <label for="quantity">Volume/Mass:</label>
+            <input
+                type="number",
+                min="0",
+                step="0.01",
+                placeholder="0.00",
+                id="quantity",
+                name="Quantity",
+                inputmode="numeric",
+                title="Numerical values only",
+                required/>
+        </p>
+        <fieldset style="display: inline-block;">
+            <legend>Select the unit of measure:</legend>
+            <input
+                type="radio",
+                id="g",
+                name="unit",
+                value="g",
+                required,
+                checked/>
+            <label for="g">g</label>
+            <input
+                type="radio",
+                id="mL",
+                name="unit",
+                value="mL"/>
+            <label for="mL">mL</label>
+        </fieldset>
+        <p id="densityDiv" hidden>
+            <label for="density">Density/Specific Gravity:</label>
+            <input
+                type="number",
+                min="0",
+                step="0.01",
+                id="density",
+                name="Density",
+                />
+        </p>
+        <p>
+            <label for="currentWeight">Current Weight:</label>
+            <input
+                type="number",
+                min="0",
+                step="0.01",
+                placeholder="0.00",
+                id="currentWeight",
+                name="Current Weight",
+                inputmode="numeric",
+                title="Numerical values only",
+                required/>
+        </p>     
+        <p>
+            <label for="date_received">Date Received: </label>
+            <input
+                type="date",
+                id="date_received",
+                required
+                />
+        </p>   
+        <p>
+            <label for="category">Category:</label>
+            <input
+                type="text",
+                id="category",
+                name="Category",
+                placeholder="Organic 5, Inorganic 7, etc..."
+                required/>
+        </p>
+        <p>
+            <label for="sds">SDS:</label>
+            <input
+                type="file",
+                id="sds",
+                name="sds",
+                required
+                />
+        </p>
+        <p>
+            <label for="manufacturer">Manufacturer:</label>
+            <input
+                type="text",
+                id="manufacturer",
+                name="Manufacturer",
+                placeholder="Fisher, Sigma, etc..."
+                required/>
+        </p>
+        <p>
+            <label for="product#">Product #:</label>
+            <input
+                type="text",
+                id="product#",
+                name="Product Number",
+                required/>
+        </p>        
+        <button type="submit">Submit</button>                                                        
+
+    </form>
     <iframe id="SDS_viewer" width="100%" height="600px" style="border:none"></iframe> 
     <script type="module" src="./scripts/scanner.js"></script>
 </body>

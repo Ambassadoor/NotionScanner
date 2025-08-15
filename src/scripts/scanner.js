@@ -95,3 +95,22 @@ const cleanup = (intervalId, abortController) => {
     clearInterval(intervalId);
     abortController.abort();
 }
+
+const mLButton = document.querySelector("#mL")
+const densityInput = document.querySelector("#densityDiv")
+
+mLButton.addEventListener('change', () => {
+    if (mLButton.value === "mL" && mLButton.checked) {
+        densityInput.hidden = false;
+        densityInput.required = true;
+    } else {
+        densityInput.hidden = true;
+        densityInput.required = false;
+    }
+})
+
+const today = new Date().toISOString().split('T');
+const dateReceived = document.querySelector("#date_received")
+
+dateReceived.value = today[0]
+dateReceived.max = today[0]

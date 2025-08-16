@@ -1,5 +1,4 @@
 export const newPageFormatter = (properties, dbid) => {
-  console.log(properties.safetyDataSheet)
   const {
     casNumber,
     company,

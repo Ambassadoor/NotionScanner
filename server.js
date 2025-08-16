@@ -10,7 +10,6 @@ import { newPageFormatter } from './src/helpers/newPageFormatter.js';
 
 const app = express();
 const upload = multer({ dest: 'uploads/'})
-console.log("hi")
 
 app.use(express.static('src'))
 app.use(express.json())
@@ -116,7 +115,6 @@ app.get(`/api/updateWeight/:pageId/:weight`, async (req, res) => {
 
 app.post(`/api/newPage`, upload.single('safetyDataSheet'), async (req, res) => {
     const sds = req.file;
-    console.log(sds, req.body)
     try {
         const formData = req.body;
         const pageConfirmation = await createNewPage(formData)

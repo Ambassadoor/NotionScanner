@@ -4,12 +4,16 @@ dotenv.config();
 import axios from 'axios';
 import express from "express";
 import multer from "multer";
+import FormData from 'form-data';
 
 import { newPageFormatter } from './src/helpers/newPageFormatter.js';
 
 
 const app = express();
-const upload = multer({ dest: 'uploads/'})
+const upload = multer({ 
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 20 * 1024 * 1024}
+})
 
 app.use(express.static('src'))
 app.use(express.json())
@@ -87,6 +91,50 @@ const createNewPage = async (formData) => {
 
 }
 
+const createFileUpload = async (file, pageId) => {
+    try {
+        console.log("File", file)
+        const uploadRequestResponse = await api.post("/file_uploads")
+        const uploadUrl = uploadRequestResponse.data.upload_url
+        
+        try {
+            const uploadResponse = await api.post(uploadUrl,file, {
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Notion-Version': version,
+                    ...file.getHeaders()
+                }
+            })
+            try {
+                const response = await api.patch(`/pages/${pageId}`, {
+                        "properties": {
+                            "Safety Data Sheet": {
+                                "type": "files",
+                                "files": [
+                                    {
+                                        "type": "file_upload",
+                                        "file_upload": {
+                                            "id": uploadResponse.data.id,
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                )
+                console.log(response)
+                return response
+            } catch (error) {
+                console.error("Error attaching file to page", error)
+            }
+        } catch (error) {
+            console.error(`Error uploading file`, error)
+        }
+    } catch (error) {
+        console.error(`Error creating file upload request`, error.message)
+    }
+}
+
 app.get(`/api/config`, (req, res) => {
     res.json({
         prefix: process.env.PREFIX || "^",
@@ -114,11 +162,22 @@ app.get(`/api/updateWeight/:pageId/:weight`, async (req, res) => {
 })
 
 app.post(`/api/newPage`, upload.single('safetyDataSheet'), async (req, res) => {
-    const sds = req.file;
     try {
+        const form = new FormData();
+
+        form.append('file', req.file.buffer, {
+            filename: req.file.originalname,
+            contentType: req.file.mimetype
+        })
         const formData = req.body;
         const pageConfirmation = await createNewPage(formData)
-        res.json(pageConfirmation)
+
+        try {
+            const response = createFileUpload(form, pageConfirmation.id)
+            res.json(response)
+        } catch (error) {
+            console.log("Error uploading file:", error.message)
+        }
     } catch (error) {
         res.status(500).json({error: error.message})
     }

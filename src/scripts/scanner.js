@@ -38,11 +38,9 @@ document.querySelector(".scan_buttons_container").addEventListener("click", (e) 
 
 // Handler for scan button click
 const onScanButtonClick = (callback) => {
-   
     // Focuses the hidden input and clears it
     scannerInput.focus();
     scannerInput.value = "";
-
     // Refreshes focus every 100ms
     const intervalId = setInterval(() => {
         if (document.activeElement !== scannerInput) {
@@ -74,6 +72,7 @@ const onScanButtonClick = (callback) => {
 
             // Calls the mapped validation function. 
             const response = callback(text, codes);
+            console.log(response)
 
             // Upon validation completion, cleans up and calls data processing function
             if (response?.done) {

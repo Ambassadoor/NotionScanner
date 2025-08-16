@@ -3,7 +3,7 @@
 // Checks if passed in code is a valid Chem code
 const isValidChemScan = (code) => {
     // Chem code keys
-    const chemKeys = ["id", "pageId"];
+    const chemKeys = ["id", "uuid"];
     let parsed
 
     // Verifies the code is a JSON object that has the correct keys

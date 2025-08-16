@@ -7,9 +7,10 @@ import { getNotionPage } from "../helpers/getNotionPage.js";
 const iFrame = document.querySelector("#SDS_viewer")
 
 // Sets src of iFrame to url to display sds
-export const displaySDS = async ({codes}) => {
-    const code = codes[0];
+export const displaySDS = async (params) => {
+    const code = params.codes[0];
     const pageId = getPageID(JSON.parse(code));
+    console.log(pageId)
     const page = await getNotionPage(pageId);
     const url = getSDSUrl(page)
 

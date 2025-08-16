@@ -72,7 +72,6 @@ const onScanButtonClick = (callback) => {
 
             // Calls the mapped validation function. 
             const response = callback(text, codes);
-            console.log(response)
 
             // Upon validation completion, cleans up and calls data processing function
             if (response?.done) {
@@ -114,3 +113,28 @@ const dateReceived = document.querySelector("#date_received")
 
 dateReceived.value = today[0]
 dateReceived.max = today[0]
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const fileInput = e.target.querySelector('input[type="file"]');
+    const files = fileInput.files;
+
+
+    const formData = new FormData(e.target);
+    
+
+    try {
+        const response = await fetch(`/api/newPage`, {
+            method: 'POST',
+            body: formData
+        })
+        const result = await response.json()
+        console.log(`Success:`, result)
+    } catch (error) {
+        console.error(error, error.data)
+    }
+}
+
+const form = document.querySelector("#newItem")
+form.addEventListener("submit", handleSubmit)

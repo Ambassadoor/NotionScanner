@@ -3,10 +3,18 @@ dotenv.config();
 
 import axios from 'axios';
 import express from "express";
+import multer from "multer";
+
+import { newPageFormatter } from './src/helpers/newPageFormatter.js';
+
 
 const app = express();
+const upload = multer({ dest: 'uploads/'})
+console.log("hi")
 
 app.use(express.static('src'))
+app.use(express.json())
+
 
 
 const port = process.env.PORT;
@@ -63,6 +71,23 @@ const updateWeight = async (pageID, weight) => {
     }
 }
 
+const createNewPage = async (formData) => {
+    const data = newPageFormatter(formData, DbId)
+
+    try {
+        const response = await api.post(`/pages`, data)
+        return response.data
+    } catch (error) {
+        if (error.response) {
+            console.error(`Error status:`, error.response.status)
+            console.error(`Error data:`, error.response.data)
+        }
+    }
+
+
+
+}
+
 app.get(`/api/config`, (req, res) => {
     res.json({
         prefix: process.env.PREFIX || "^",
@@ -86,6 +111,18 @@ app.get(`/api/updateWeight/:pageId/:weight`, async (req, res) => {
         res.json(update)
     } catch (error) {
         res.status(500).json({ error: error.message})
+    }
+})
+
+app.post(`/api/newPage`, upload.single('safetyDataSheet'), async (req, res) => {
+    const sds = req.file;
+    console.log(sds, req.body)
+    try {
+        const formData = req.body;
+        const pageConfirmation = await createNewPage(formData)
+        res.json(pageConfirmation)
+    } catch (error) {
+        res.status(500).json({error: error.message})
     }
 })
 

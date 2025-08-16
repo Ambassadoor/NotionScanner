@@ -10,8 +10,8 @@ const iFrame = document.querySelector("#SDS_viewer")
 export const displaySDS = async (params) => {
     const code = params.codes[0];
     const pageId = getPageID(JSON.parse(code));
-    console.log(pageId)
     const page = await getNotionPage(pageId);
+    console.log(page)
     const url = getSDSUrl(page)
 
     iFrame.src = url

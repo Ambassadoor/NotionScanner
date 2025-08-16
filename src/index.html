@@ -25,13 +25,13 @@
         spellcheck="off"
         autocorrect="off"
         style="position: absolute; left: -9999px"/>
-    <form>
+    <form name="newItem" id="newItem", enctype="multipart/form-data">
         <p>
             <label for="name" >Chemical Name:</label>
             <input 
                 type="text", 
                 id="name", 
-                name="Chemical Name", 
+                name="name", 
                 placeholder="Sodium Hydroxide, etc..."
                 autofocus,
                 required/>
@@ -41,7 +41,7 @@
             <input 
                 type="text", 
                 id="cas", 
-                name="CAS", 
+                name="casNumber", 
                 inputmode="numeric"
                 pattern="\d{1,7}-\d{2}-\d",
                 placeholder="0000-00-0",
@@ -57,7 +57,7 @@
                 step="0.01",
                 placeholder="0.00",
                 id="quantity",
-                name="Quantity",
+                name="maxVolumeMass",
                 inputmode="numeric",
                 title="Numerical values only",
                 required/>
@@ -68,7 +68,7 @@
                 type="radio",
                 id="g",
                 class="radio",
-                name="unit",
+                name="unitOfMeasurement",
                 value="g",
                 required,
                 checked/>
@@ -77,7 +77,7 @@
                 type="radio",
                 id="mL",
                 class="radio",
-                name="unit",
+                name="unitOfMeasurement",
                 value="mL"/>
             <label for="mL">mL</label>
         </fieldset>
@@ -88,7 +88,7 @@
                 min="0",
                 step="0.01",
                 id="density",
-                name="Density",
+                name="density",
                 />
         </p>
         <p>
@@ -109,6 +109,7 @@
             <input
                 type="date",
                 id="date_received",
+                name="dateReceived",
                 required
                 />
         </p>   
@@ -117,8 +118,8 @@
             <input
                 type="text",
                 id="category",
-                name="Category",
-                placeholder="Organic 5, Inorganic 7, etc..."
+                name="groupNumber",
+                placeholder="O5, I10, etc..."
                 required/>
         </p>
         <p>
@@ -126,7 +127,8 @@
             <input
                 type="file",
                 id="sds",
-                name="sds",
+                name="safetyDataSheet",
+                accept=".pdf"
                 required
                 />
         </p>
@@ -135,7 +137,7 @@
             <input
                 type="text",
                 id="manufacturer",
-                name="Manufacturer",
+                name="company",
                 placeholder="Fisher, Sigma, etc..."
                 required/>
         </p>
@@ -144,7 +146,7 @@
             <input
                 type="text",
                 id="product#",
-                name="Product Number",
+                name="productNumber",
                 required/>
         </p>        
         <button type="submit">Submit</button>                                                        
